@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật Lele 18 Tuổi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e8a8c8;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .left-section {
+            flex: 1.3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            color: #333;
+            z-index: 10;
+        }
+
+        .left-content {
+            text-align: left;
+            width: 100%;
+            max-width: 650px;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            min-height: 400px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: #c41e3a;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            line-height: 1.4;
+            min-height: 1.4em;
+        }
+
+        .wishes {
+            font-size: 1.15em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .wishes p {
+            margin-bottom: 15px;
+            min-height: 1.6em;
+        }
+
+        /* --- Style cho Nút Nhận Quà (Mới) --- */
+        .gift-container {
+            margin-top: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Căn giữa nút */
+            height: 50px; /* Giữ không gian tránh giật layout */
+        }
+
+        .gift-btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 12px 40px;
+            background: linear-gradient(135deg, #ff4d4d 0%, #c41e3a 100%);
+            color: white;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+            transition: all 0.4s ease;
+            
+            /* Trạng thái ẩn ban đầu */
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        .gift-btn.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .gift-btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(196, 30, 58, 0.5);
+            background: linear-gradient(135deg, #ff6b6b 0%, #d63030 100%);
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: #c41e3a;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .right-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            position: relative;
+        }
+
+        /* --- Style cho Bánh sinh nhật --- */
+        .cake {
+            position: relative;
+            width: 250px;
+            height: 200px;
+            transform: scale(1.5);
+        }
+
+        .plate {
+            width: 270px;
+            height: 110px;
+            position: absolute;
+            bottom: -10px;
+            left: -10px;
+            background-color: #ccc;
+            border-radius: 50%;
+            box-shadow: 0 2px 0 #aaa, 0 4px 0 #aaa, 0 5px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .cake > * { position: absolute; }
+
+        .layer {
+            position: absolute;
+            display: block;
+            width: 250px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #553c13;
+            box-shadow:
+                0 2px 0px #5e4820, 0 4px 0px #4a3010, 0 6px 0px #49300d,
+                0 8px 0px #48300b, 0 10px 0px #472f08, 0 12px 0px #462e05,
+                0 14px 0px #452d02, 0 16px 0px #442c00, 0 18px 0px #442b00,
+                0 20px 0px #432a00, 0 22px 0px #432900, 0 24px 0px #422800,
+                0 26px 0px #422700, 0 28px 0px #412600, 0 30px 0px #412500;
+        }
+
+        .layer-top { top: 0px; }
+        .layer-middle { top: 33px; }
+        .layer-bottom { top: 66px; }
+
+        .icing {
+            top: 2px;
+            left: 5px;
+            background-color: #f0e4d0;
+            width: 240px;
+            height: 90px;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .icing::before {
+            content: "";
+            position: absolute;
+            top: 4px; right: 5px; bottom: 6px; left: 5px;
+            background-color: #f3e9dd;
+            box-shadow: 0 0 4px #f5efea, 0 0 4px #f5efea, 0 0 4px #f5efea;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .drip {
+            display: block;
+            width: 50px; height: 60px;
+            border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
+            background-color: #f0e4d0;
+            position: absolute;
+        }
+
+        .drip1 { top: 53px; left: 5px; transform: skewY(15deg); height: 48px; width: 40px; }
+        .drip2 { top: 69px; left: 181px; transform: skewY(-15deg); }
+        .drip3 { top: 54px; left: 90px; width: 80px; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; }
+
+        /* Nến số 1 & 8 */
+        .candle-one, .candle-eight {
+            font-size: 60px; font-weight: 900; color: #c41e3a; line-height: 1;
+            z-index: 10; position: absolute; cursor: pointer; user-select: none;
+            text-shadow: 2px 2px 0 #e8e8e8, 4px 4px 0 #d0d0d0, -1px -1px 0 #ffffff, -2px -2px 0 #f5f5f5;
+        }
+        .candle-one::before { content: "1"; }
+        .candle-eight::before { content: "8"; }
+
+        /* Lửa cho nến số */
+        .candle-one::after, .candle-eight::after {
+            content: "";
+            position: absolute;
+            background: linear-gradient(180deg, #ff6b00 0%, #ffd700 50%, #ff8c00 100%);
+            width: 12px; height: 15px;
+            border-radius: 6px 6px 4px 4px / 8px 8px 4px 4px;
+            top: -20px; left: 12px;
+            box-shadow: 0 0 3px rgba(255,107,0,0.6), 0 0 6px rgba(255,107,0,0.5), 0 0 10px rgba(255,165,0,0.4), 0 0 15px rgba(255,107,0,0.3);
+            transform-origin: 50% 90%;
+            opacity: 0;
+        }
+        .candle-eight::after { left: 15px; }
+        
+        .candle-one.lit::after, .candle-eight.lit::after {
+             animation: flicker-small 0.8s ease-in-out alternate infinite;
+             opacity: 1;
+        }
+
+        /* Dây nến que */
+        .wax-stick {
+            position: absolute; background-color: #f5deb3; border-radius: 2px;
+            box-shadow: inset -1px -1px 2px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1); z-index: 9;
+        }
+        .wax-stick-left { width: 4px; height: 12px; left: 109px; top: -17px; }
+        .wax-stick-right { width: 4px; height: 12px; left: 140px; top: -17px; }
+
+        .stick-flame { position: absolute; z-index: 10; cursor: pointer; user-select: none; }
+        .stick-flame::after {
+            content: ""; position: absolute;
+            background: linear-gradient(180deg, #ff6b00 0%, #ffd700 50%, #ff8c00 100%);
+            width: 10px; height: 12px;
+            border-radius: 5px 5px 3px 3px / 6px 6px 3px 3px;
+            box-shadow: 0 0 3px rgba(255,107,0,0.6), 0 0 6px rgba(255,107,0,0.5), 0 0 10px rgba(255,165,0,0.4), 0 0 15px rgba(255,107,0,0.3);
+            transform-origin: 50% 90%; opacity: 0;
+        }
+        .stick-flame.lit::after { animation: flicker-small 0.8s ease-in-out alternate infinite; opacity: 1; }
+        .stick-flame.blowing::after { animation: blow-out 0.8s ease-out forwards; }
+        .stick-flame-left { left: 107px; top: -22px; }
+        .stick-flame-right { left: 138px; top: -22px; }
+
+        @keyframes blow-out {
+            0% { opacity: 1; transform: scaleY(1) skewX(0deg); height: 12px; }
+            100% { opacity: 0; transform: scaleY(0) skewX(-35deg); height: 0px; }
+        }
+        @keyframes flicker-small {
+            0%, 100% { transform: skewX(5deg) scaleY(0.95); opacity: 1; }
+            50% { transform: skewX(10deg) scaleY(1.05); opacity: 0.9; }
+        }
+
+        /* Nút Châm lửa & Thổi nến */
+        .light-button {
+            position: absolute;
+            bottom: -200px;
+            left: calc(50% - 60px);
+            transform: translateX(-50%);
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            color: white; border: none; border-radius: 25px;
+            font-size: 1.1em; font-weight: bold; cursor: pointer; z-index: 100;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+            min-width: 120px;
+        }
+        .light-button:hover { transform: translateX(-50%) scale(1.05); box-shadow: 0 6px 20px rgba(255, 20, 147, 0.6); }
+        .light-button.off { background: linear-gradient(135deg, #a0a0a0 0%, #808080 100%); }
+
+        .blow-button {
+            position: absolute;
+            bottom: -200px;
+            left: calc(50% + 120px);
+            transform: translateX(-50%);
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #87ceeb 0%, #4a90e2 100%);
+            color: white; border: none; border-radius: 25px;
+            font-size: 1.1em; font-weight: bold; cursor: pointer; z-index: 100;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+            min-width: 120px;
+        }
+        .blow-button:hover { transform: translateX(-50%) scale(1.05); box-shadow: 0 6px 20px rgba(74, 144, 226, 0.6); }
+
+        /* Confetti */
+        .confetti {
+            position: absolute; width: 10px; height: 10px; top: -10px; z-index: 200; pointer-events: none;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="left-section">
+        <div class="left-content" id="typewriter-container">
+            <h1 id="title-text"></h1>
+            <div class="wishes" id="body-text"></div>
+            
+            <div class="gift-container">
+                <a href="https://drive.google.com/drive/u/2/folders/1G7tKVN2ylWkJBSZYbKR9fWhhcsfSKu1U" 
+                   target="_blank" 
+                   class="gift-btn" 
+                   id="gift-btn">
+                   🎁 Nhận quà
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-section">
+        <div class="cake" id="cakeContainer">
+            <div class="plate"></div>
+            <div class="layer layer-bottom"></div>
+            <div class="layer layer-middle"></div>
+            <div class="layer layer-top"></div>
+            <div class="icing"></div>
+            <div class="drip drip1"></div>
+            <div class="drip drip2"></div>
+            <div class="drip drip3"></div>
+            
+            <div class="candle-one lit" style="left: 88px; top: -15px;" onclick="toggleFlame(this)"></div>
+            <div class="candle-eight lit" style="left: 122px; top: -15px;" onclick="toggleFlame(this)"></div>
+
+            <div class="wax-stick wax-stick-left"></div>
+            <div class="wax-stick wax-stick-right"></div>
+            <div class="stick-flame stick-flame-left" onclick="toggleFlame(this)"></div>
+            <div class="stick-flame stick-flame-right" onclick="toggleFlame(this)"></div>
+        </div>
+
+        <button class="light-button off" id="lightButton" onclick="toggleLightButton()">Châm lửa: Off</button>
+        <button class="blow-button" id="blowButton" onclick="blowOutCandles()">Thổi nến</button>
+    </div>
+
+    <script>
+        let lightIsOn = false;
+
+        // --- CẤU HÌNH HIỆU ỨNG ĐÁNH MÁY ---
+        const titleContent = "Hellooooo,\n chúc mừng sinh nhật tuổi 18 nhé!!!!! 🎂";
+        const bodyParagraphs = [
+            "Mãi mới bằng bạn bằng bè😏, tuổi mới chúc Lele có bằng lái xe, chúc điểm học phần toàn A+, chúc lên rank cao thủ (nếu muốn chơi liqi lâu dài, Huy hướng dẫn cho😘).",
+            "Chúc người iu lúc nào cũng vui vẻ, no more căng thẳng stress, you are bông hoa đẹp nhất🌹🌹🌹.",
+            "Sorry vì không thể lên thăm bạn, khi nào về bạn Huy sẽ tặng quà sau nhé, sodi for late giftsTT. Thôi thì mình tặng trước cái này nhé, cái này hứa làm từ lâu roi mà giờ mới làm:P"
+        ];
+        
+        const typeSpeed = 40; 
+
+        window.onload = function() {
+            startTypewriter();
+        };
+
+        async function startTypewriter() {
+            const titleEl = document.getElementById('title-text');
+            const bodyEl = document.getElementById('body-text');
+            const giftBtn = document.getElementById('gift-btn');
+            
+            // Gõ tiêu đề
+            titleEl.classList.add('typing-cursor');
+            await typeText(titleEl, titleContent);
+            titleEl.classList.remove('typing-cursor'); 
+
+            // Gõ từng đoạn văn
+            for (let i = 0; i < bodyParagraphs.length; i++) {
+                const p = document.createElement('p');
+                p.classList.add('typing-cursor');
+                bodyEl.appendChild(p);
+                
+                await typeText(p, bodyParagraphs[i]);
+                
+                p.classList.remove('typing-cursor');
+            }
+
+            // Hiện nút quà sau khi gõ xong
+            if(giftBtn) {
+                giftBtn.classList.add('show');
+            }
+        }
+
+        function typeText(element, text) {
+            return new Promise(resolve => {
+                let i = 0;
+                function type() {
+                    if (i < text.length) {
+                        if (text.charAt(i) === '\n') {
+                            element.innerHTML += '<br>';
+                        } else {
+                            element.textContent += text.charAt(i);
+                        }
+                        i++;
+                        setTimeout(type, typeSpeed);
+                    } else {
+                        resolve();
+                    }
+                }
+                type();
+            });
+        }
+
+        // --- CÁC CHỨC NĂNG BÁNH SINH NHẬT ---
+
+        function toggleLightButton() {
+            lightIsOn = !lightIsOn;
+            const button = document.getElementById('lightButton');
+            if (lightIsOn) {
+                button.textContent = 'Châm lửa: On';
+                button.classList.remove('off');
+            } else {
+                button.textContent = 'Châm lửa: Off';
+                button.classList.add('off');
+            }
+        }
+
+        function toggleFlame(element) {
+            if (!lightIsOn) return;
+            element.classList.toggle('lit');
+        }
+
+        function dropConfetti() {
+            const colors = ['#ff69b4', '#ffd700', '#87ceeb', '#ff4500', '#32cd32', '#9370db'];
+            const confettiCount = 100;
+
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                const duration = Math.random() * 3 + 2;
+                confetti.style.animation = `fall ${duration}s linear forwards`;
+                
+                const size = Math.random() * 5 + 8 + 'px';
+                confetti.style.width = size;
+                confetti.style.height = size;
+                
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, duration * 1000);
+            }
+        }
+
+        function blowOutCandles() {
+            const allFlames = document.querySelectorAll('.stick-flame');
+            const candleOne = document.querySelector('.candle-one');
+            const candleEight = document.querySelector('.candle-eight');
+
+            allFlames.forEach(flame => flame.classList.remove('lit'));
+            if(candleOne) candleOne.classList.remove('lit');
+            if(candleEight) candleEight.classList.remove('lit');
+
+            lightIsOn = false;
+            const button = document.getElementById('lightButton');
+            button.textContent = 'Châm lửa: Off';
+            button.classList.add('off');
+
+            dropConfetti();
+        }
+    </script>
+</body>
+</html>
